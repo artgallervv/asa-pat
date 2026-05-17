@@ -142,14 +142,14 @@ img {
 
 #character {
   display: block;
-  width: 260px;
+  width: 280px;
 }
 
 #characterHover {
   position: absolute;
   top: 0;
   left: 0;
-  width: 260px;
+  width: 280px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.15s ease;
@@ -237,7 +237,7 @@ body.petting #characterHover {
 }
 
 .dropdown-content a {
-  color: black;
+  color: rgb(61, 61, 61);
   text-decoration: none;
   display: block;
 }
@@ -249,12 +249,17 @@ body.petting #characterHover {
     border-radius:10px
 }
 
-.dropdown-content .link:hover, .dropdown-content .link-text:hover{
+.dropdown-content .link:hover{
   background-color: #b4b1ab;
   text-decoration:none !important;
-  color:#3e4c60
+  color:#3e4c60;
+  transition:all 0.3s ease
 }
 
+.dropdown-content .link-text:hover {
+      text-decoration:none !important;
+      color:#101010;
+}
 
 
 .dropdown:hover .dropdown-content {
@@ -270,10 +275,15 @@ nav {
     background-image:linear-gradient(#000, rgba(235,235,235,0)) 
 }
 
-nav h1, nav h2 {
-    color:#fff
+nav h1 a, nav h2 a {
+    color:#ececec
 }
 
+nav h1 a:hover, nav h2 a:hover {
+    color:#ffffff;
+    text-decoration:none !important;  
+    transform:scale(1.03)
+}
 .textbox {
     background-color:#b7b2af;
     border:10px solid #656060;
@@ -310,4 +320,10 @@ body.petting #character,
 body.petting #characterHover {
   animation: petBounce 0.35s ease-in-out infinite;
   transform-origin:center bottom
+}
+
+#characterWrapper {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }

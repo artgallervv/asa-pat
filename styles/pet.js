@@ -13,6 +13,10 @@ document.addEventListener("mousemove", (e) => {
 });
 
 
+const isTouchDevice =
+  'ontouchstart' in window ||
+  navigator.maxTouchPoints > 0;
+
 
 
 function setCharacterState(state) {
@@ -50,6 +54,7 @@ let progress = 0;
 let petting = false;
 let success = false;
 let mode = "idle";
+let hoveringCharacter = false;
 
 let lastInteraction = Date.now();
 let sad = false;
@@ -79,7 +84,7 @@ character.addEventListener("click", () => {
   sad = false;
 
   character.src = "image/asa.png";
-  character.style.width = "260px";
+  character.style.width = "280px";
 
   instruction.textContent = "Hold down left click to pat Asa!!";
   progressBarContainer.classList.remove("hidden");
@@ -87,17 +92,20 @@ character.addEventListener("click", () => {
 
 
 // keys
-character.addEventListener("mouseenter", () => {
-  hoveringCharacter = true;
-});
+if (!isTouchDevice) {
 
-character.addEventListener("mouseleave", () => {
-  hoveringCharacter = false;
-  petting = false;
-  document.body.classList.remove("petting");
-  petCursor.style.display = "none";
-});
+  character.addEventListener("mouseenter", () => {
+    hoveringCharacter = true;
+  });
 
+  character.addEventListener("mouseleave", () => {
+    hoveringCharacter = false;
+    petting = false;
+    document.body.classList.remove("petting");
+    petCursor.style.display = "none";
+  });
+
+}
 
 character.addEventListener("mousedown", (e) => {
 
@@ -105,7 +113,7 @@ character.addEventListener("mousedown", (e) => {
 characterHover.style.visibility = "hidden";
 document.body.classList.add("petting");
 
-  if (!hoveringCharacter) return;
+if (!hoveringCharacter && !isTouchDevice) return;
 
   petting = true;
   lastInteraction = Date.now();
@@ -256,3 +264,98 @@ characterWrapper.addEventListener("mouseleave", () => {
   characterHover.style.visibility = "hidden";
 });
 
+
+
+const wrapper = document.getElementById("characterWrapper");
+
+wrapper.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+
+  const touch = e.touches[0];
+
+  const rect = wrapper.getBoundingClientRect();
+  const inside =
+    touch.clientX >= rect.left &&
+    touch.clientX <= rect.right &&
+    touch.clientY >= rect.top &&
+    touch.clientY <= rect.bottom;
+
+  if (!inside) return;
+
+  hoveringCharacter = true;
+  petting = true;
+  lastInteraction = Date.now();
+
+  document.body.classList.add("petting");
+  petCursor.style.display = "block";
+
+
+  //make this actually playable on mobile
+if (mode === "idle") {
+  mode = "ready";
+  lastInteraction = Date.now();
+  sad = false;
+
+  character.src = "image/asa.png";
+  character.style.width = "280px";
+
+  instruction.textContent = "Keep holding to pat Asa!!";
+  progressBarContainer.classList.remove("hidden");
+}
+
+characterHover.style.opacity = 0;
+characterHover.style.visibility = "hidden";
+});
+
+document.addEventListener("touchmove", (e) => {
+  const touch = e.touches[0];
+
+  mouseX = touch.clientX;
+  mouseY = touch.clientY;
+});
+
+
+document.addEventListener("touchend", () => {
+  petting = false;
+
+  document.body.classList.remove("petting");
+  petCursor.style.display = "none";
+
+  petSound.pause();
+  petSound.currentTime = 0;
+});
+
+let isTouch = false;
+
+wrapper.addEventListener("touchstart", () => isTouch = true);
+wrapper.addEventListener("touchend", () => setTimeout(() => isTouch = false, 50));
+
+
+
+
+// get rid of the strange text at the bottom
+
+function hideCounterTextInNode(node) {
+  if (node.nodeType === 1) { 
+    if (node.textContent && node.textContent.includes("Counter Error: Do not change the code. Click here to show the correct code!")) {
+      node.style.display = "none";
+    }
+  }
+}
+
+
+document.querySelectorAll("*").forEach(hideCounterTextInNode);
+
+
+const observer = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    mutation.addedNodes.forEach(node => {
+      hideCounterTextInNode(node);
+    });
+  });
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
