@@ -1,0 +1,313 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=McLaren&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  overflow:hidden;
+      background-image:url('../image/IMG-1197.png');
+  background-size:cover;
+  backdrop-filter:blur(2px);
+  font-family:"McLaren" !important
+  
+}
+
+.pet-container {
+  margin-top: 40px;
+}
+
+
+
+img {
+  width: 250px;
+  user-select: none;
+}
+
+.progress-bar {
+  width: 300px;
+  height: 20px;
+  border: 2px solid #333;
+  border-radius:40px;
+  margin: 20px auto;
+  background: #ddd !important;
+}
+
+#progress {
+  height: 100%;
+  width: 0%;
+  background-image:url(https://t4.ftcdn.net/jpg/02/52/92/75/360_F_252927550_o13IK6RuGYsOezhnWfWojoKM01XrxKmc.jpg);
+  background: #92a3b6;
+  transition: width 0.1s linear;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ready img {
+  transform: scale(1.15);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+img {
+  width: 200px;
+  transition: transform 0.4s, width 0.4s;
+  cursor: pointer;
+}
+
+
+#particleContainer {
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 30px;
+  pointer-events: none;
+  animation: floatUp 1s linear forwards;
+  transform:rotate(90deg)
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) scale(0.7); }
+  100% { opacity: 0; transform: translateY(-80px) scale(1.2); }
+}
+
+
+
+body {
+  cursor: url("image/cursor_idle.png"), auto;
+}
+
+body.petting {
+  cursor: url("image/cursor_pet.png"), auto;
+}
+
+
+@keyframes tap {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+  100% { transform: scale(1); }
+}
+
+.tap {
+  animation: tap 0.2s ease;
+}
+
+
+#petCursor {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+  transform: translate(-50%, -50%);
+}
+
+
+body.petting {
+  cursor: none;
+}
+
+
+body.petting #petCursor {
+  animation: handBounce 0.25s infinite;
+}
+
+@keyframes handBounce {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.15) rotate(-10deg); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+
+#characterWrapper {
+  position: relative;
+  width: fit-content;
+    
+}
+
+
+
+#character {
+  display: block;
+  width: 260px;
+}
+
+#characterHover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 260px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+
+#characterWrapper:hover #character {
+  transform: scale(1.03);
+  transition: transform 0.15s;
+  filter: drop-shadow(0 3px 0px rgba(224, 234, 237)) drop-shadow(0 -2px 0px rgba(224, 234, 237)) drop-shadow(2px 0px 0px rgba(224, 234, 237)) drop-shadow(-2px 0px 0px rgba(224, 234, 237))
+}
+
+
+#characterHover {
+  filter: drop-shadow(0 3px 0px rgba(224, 234, 237)) drop-shadow(0 -2px 0px rgba(224, 234, 237)) drop-shadow(2px 0px 0px rgba(224, 234, 237)) drop-shadow(-2px 0px 0px rgba(224, 234, 237));
+}
+
+
+#characterContainer{
+  position:relative;
+  width:400px;
+  user-select:none;
+}
+
+.sprite{
+  position:absolute;
+  width:100%;
+  top:0;
+  left:0;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.2s ease;
+}
+
+.sprite.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+
+body.petting #characterHover {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+
+#characterWrapper.hovering #character {
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+#characterWrapper.hovering #characterHover {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.dropbtn {
+  background-color: #88a4b7;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius:20px;
+  
+  
+}
+
+.dropdown {
+ position:absolute !important;
+  top:20px;
+  right:20px !important
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right:20px;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index:900000;
+  border-radius:20px;
+}
+
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+
+.logo {
+    max-width:40px;
+    background-color:#fff;
+    border-radius:10px
+}
+
+.dropdown-content .link:hover, .dropdown-content .link-text:hover{
+  background-color: #b4b1ab;
+  text-decoration:none !important;
+  color:#3e4c60
+}
+
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #9b9586;
+   transition: all 0.35s ease !important
+}
+
+nav {
+    background-image:linear-gradient(#000, rgba(235,235,235,0)) 
+}
+
+nav h1, nav h2 {
+    color:#fff
+}
+
+.textbox {
+    background-color:#b7b2af;
+    border:10px solid #656060;
+  border-radius:20px;
+    position:sticky;
+    width:100%;
+    height:250px;
+    
+}
+
+.sticky-textbox {
+    position:sticky
+}
+
+#instruction {
+    position:absolute;
+    color:#b9b3b3;
+    background-color:#656060;
+      border:3px solid #1b1818;
+    border-radius:20px;
+}
+
+.message {
+    background-color: #b9b3b3;
+    border-radius:7.5px
+}
+@keyframes petBounce {
+  0%   { transform: translateY(0px) scaleY(1.05) scaleX(1.05); }
+  50%  { transform: translateY(-1px) scaleY(1.045) scaleX(1.05) ;}
+  100% { transform: translateY(0px) scaleY(1.05) scaleX(1.05); }
+}
+
+body.petting #character,
+body.petting #characterHover {
+  animation: petBounce 0.35s ease-in-out infinite;
+  transform-origin:center bottom
+}
