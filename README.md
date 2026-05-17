@@ -1,4 +1,4 @@
-## ASA PAT
+# ASA PAT
 *Give headpats to Asa Mitaka from Chainsaw Man.*
 > I wanted to make this minigame because I think Asa Mitaka is very cool, and she deserves lots of hugs and love.
 ### Features
