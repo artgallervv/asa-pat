@@ -3,19 +3,45 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  overflow:hidden;
       background-image:url('../image/IMG-1197.png');
   background-size:cover;
-  backdrop-filter:blur(2px);
   font-family:"McLaren" !important
   
 }
 
-.pet-container {
-  margin-top: 40px;
+body::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  backdrop-filter: blur(2px);
+
+  pointer-events: none;
+
+  z-index: -1;
 }
 
 
+
+.pet-container {
+  position: fixed;
+
+  left: 50%;
+  bottom: 120px;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  width: 100%;
+
+}
+#characterWrapper {
+  pointer-events: auto;
+}
 
 img {
   width: 250px;
@@ -142,14 +168,14 @@ img {
 
 #character {
   display: block;
-  width: 280px;
+  width: calc(52.5vh - 75px);
 }
 
 #characterHover {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
-  width: 280px;
+   width: calc(52.5vh - 75px);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.15s ease;
@@ -177,7 +203,7 @@ img {
 .sprite{
   position:absolute;
   width:100%;
-  top:0;
+  bottom:0;
   left:0;
   opacity:0;
   pointer-events:none;
@@ -244,7 +270,7 @@ body.petting #characterHover {
 
 
 .logo {
-    max-width:40px;
+    max-width:30px;
     background-color:#fff;
     border-radius:10px
 }
@@ -284,19 +310,49 @@ nav h1 a:hover, nav h2 a:hover {
     text-decoration:none !important;  
     transform:scale(1.03)
 }
-.textbox {
-    background-color:#b7b2af;
-    border:10px solid #656060;
-  border-radius:20px;
-    position:sticky;
-    width:100%;
-    height:250px;
-    
+
+#hud {
+  position: fixed;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding: 16px;
+
+  z-index: 9999999;
+
+  pointer-events: none;
+
+  box-sizing: border-box;
 }
 
-.sticky-textbox {
-    position:sticky
+.textbox {
+  pointer-events: auto;
+
+  width:calc(95vw);
+
+  background-color: #b7b2af;
+
+  border: 10px solid #656060;
+  border-radius: 20px;
+
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+
+  text-align: center;
+
+  max-height: 80vh;
+  overflow-y: auto;
+
+  box-sizing: border-box;
 }
+
+
 
 #instruction {
     position:absolute;
@@ -304,6 +360,8 @@ nav h1 a:hover, nav h2 a:hover {
     background-color:#656060;
       border:3px solid #1b1818;
     border-radius:20px;
+    top:10.25vh;
+   
 }
 
 .message {
@@ -326,4 +384,26 @@ body.petting #characterHover {
   touch-action: none;
   -webkit-user-select: none;
   user-select: none;
+}
+
+
+#restartBtn {
+  background-color: #88a4b7;
+  color: white;
+  padding: 13px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius:50px;
+  transition: 0.2s;
+  border:1px solid #333;
+  z-index:10000 !important
+}
+
+#restartBtn:hover {
+  transform: scale(1.08);
+}
+
+.hidden {
+  display: none;
 }

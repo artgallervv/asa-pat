@@ -2,6 +2,7 @@
 const petCursor = document.getElementById("petCursor");
 const characterWrapper = document.getElementById("characterWrapper");
 const characterHover = document.getElementById("characterHover");
+const restartBtn = document.getElementById("restartBtn");
 
 
 let mouseX = 0;
@@ -39,7 +40,7 @@ function setCharacterState(state) {
 
 
 
-const petSound = new Audio("petting.mp3");
+const petSound = new Audio("audio/petting.mp3");
 petSound.loop = true;
 petSound.volume = 0.4;
 
@@ -84,7 +85,6 @@ character.addEventListener("click", () => {
   sad = false;
 
   character.src = "image/asa.png";
-  character.style.width = "280px";
 
   instruction.textContent = "Hold down left click to pat Asa!!";
   progressBarContainer.classList.remove("hidden");
@@ -198,18 +198,19 @@ if (mode === "ready" && !success) {
 }
   }
 
-  // happy
-  if (progress >= 100 && !success) {
-    success = true;
-    mode = "success";
+if (progress >= 100 && !success) {
+  success = true;
+  mode = "success";
 
-    character.src = "image/asa_happy.png";
-    message.textContent = "Asa is happy now! yay!!!";
+  character.src = "image/asa_happy.png";
+  message.textContent = "Asa is happy now! yay!!!";
 
-    petCount++;
-    localStorage.setItem("petCount", petCount);
-    counterText.textContent = `You've now pat Asa ${petCount} times!`;
-  }
+  petCount++;
+  localStorage.setItem("petCount", petCount);
+  counterText.textContent = `You've now pat Asa ${petCount} times!`;
+
+  restartBtn.classList.remove("hidden"); // ⭐ SHOW BUTTON
+}
 
   requestAnimationFrame(gameLoop);
 
@@ -297,7 +298,6 @@ if (mode === "idle") {
   sad = false;
 
   character.src = "image/asa.png";
-  character.style.width = "280px";
 
   instruction.textContent = "Keep holding to pat Asa!!";
   progressBarContainer.classList.remove("hidden");
@@ -358,4 +358,9 @@ const observer = new MutationObserver(mutations => {
 observer.observe(document.body, {
   childList: true,
   subtree: true
+});
+
+
+restartBtn.addEventListener("click", () => {
+  location.reload();
 });
