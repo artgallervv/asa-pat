@@ -182,6 +182,18 @@ img {
 }
 
 
+
+@media (max-width:786px) {
+  #character {
+  width: calc(42.5vh - 45px);
+}
+
+#characterHover {
+   width: calc(42.5vh - 45px);
+}
+}
+
+
 #characterWrapper:hover #character {
   transform: scale(1.03);
   transition: transform 0.15s;
