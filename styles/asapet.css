@@ -5,9 +5,11 @@ body {
   text-align: center;
       background-image:url('../image/IMG-1197.png');
   background-size:cover;
-  font-family:"McLaren" !important
+  font-family:"McLaren" !important;
   
 }
+
+
 
 body::before {
   content: "";
@@ -190,6 +192,10 @@ img {
 
 #characterHover {
    width: calc(42.5vh - 45px);
+}
+
+body {
+  font-size:20.5px !important
 }
 }
 
