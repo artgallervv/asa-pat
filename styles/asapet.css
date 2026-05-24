@@ -333,9 +333,6 @@ body.petting #characterHover {
       border:3px solid #1b1818;
     border-radius:20px;
 }
-.message {
-  text-transform: capitalize !important;
-}
 
 
 nav {

@@ -60,7 +60,7 @@ const achievements = [
     title: "Thank you!",
     description: "Thank you for playing Asa Pat! I worked hard on it. A special visitor has come, try patting her too!",
     image: "image/verne-asa-mini.png",
-    video: "video/asa_reze_vid.mp4"
+    video: "video/asa_reze_vid_small.mp4"
   }
 
 
