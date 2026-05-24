@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=McLaren&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=McLaren&family=Sniglet:wght@400;800&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 body {
   font-family: Arial, sans-serif;
   text-align: center;
@@ -263,6 +263,7 @@ body.petting #characterHover {
   
 }
 
+
 .dropdown {
  position:absolute !important;
   top:20px;
@@ -273,7 +274,8 @@ body.petting #characterHover {
   display: none;
   position: absolute;
   right:20px;
-  background-color: #f9f9f9;
+    background-color: #b7b2af;
+  border: 10px solid #656060;
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index:900000;
@@ -294,9 +296,10 @@ body.petting #characterHover {
 }
 
 .dropdown-content .link:hover{
-  background-color: #b4b1ab;
+  background-color: #b9b3b3;
   text-decoration:none !important;
   color:#3e4c60;
+  border-radius:10px;
   transition:all 0.3s ease
 }
 
@@ -310,10 +313,30 @@ body.petting #characterHover {
   display: block;
 }
 
-.dropdown:hover .dropbtn {
-  background-color: #9b9586;
-   transition: all 0.35s ease !important
+.dropdown:hover .dropbtn  {
+  background-color: #9b9586;  
+  transition: 0.2s;
+     transform:scale(1.05) !important
 }
+
+.switching-button {
+    color:#b9b3b3;
+    background-color:#656060;
+      border:3px solid #1b1818;
+    border-radius:20px;
+    transition:0.35s
+}
+
+.switching-button:hover {
+      color:#b9b3b3;
+    background-color:#797272;
+      border:3px solid #1b1818;
+    border-radius:20px;
+}
+.message {
+  text-transform: capitalize !important;
+}
+
 
 nav {
     background-image:linear-gradient(#000, rgba(235,235,235,0)) 
@@ -323,6 +346,10 @@ nav h1 a, nav h2 a {
     color:#ececec
 }
 
+
+h1,h2, h3 {
+    color:#ececec
+}
 nav h1 a:hover, nav h2 a:hover {
     color:#ffffff;
     text-decoration:none !important;  
@@ -343,7 +370,7 @@ nav h1 a:hover, nav h2 a:hover {
 
   padding: 16px;
 
-  z-index: 9999999;
+  z-index: 999997;
 
   pointer-events: none;
 
@@ -369,7 +396,6 @@ nav h1 a:hover, nav h2 a:hover {
 
   box-sizing: border-box;
 }
-
 
 
 #instruction {
@@ -424,4 +450,345 @@ body.petting #characterHover {
 
 .hidden {
   display: none;
+}
+
+
+/* achievement css*/
+#achievementToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  z-index: 9999998;
+
+
+
+  cursor: pointer;
+
+
+  background-color: #88a4b7;
+  color: white;
+  padding: 8px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius:20px;
+  
+
+}
+
+#achievementToggle:hover {
+
+  background-color: #9b9586;  
+  transition: 0.2s;
+     transform:scale(1.05) !important
+}
+
+#achievementSidebar {
+  position: fixed;
+
+  top: 0;
+  left: -380px;
+
+  width: 380px;
+  height: 100vh;
+
+  background: #2b2824;
+
+  padding: 20px;
+
+  transition: left 0.35s ease;
+
+  z-index: 999999;
+
+  overflow-y: auto;
+  border-top-right-radius:30px;
+  border-bottom-right-radius:30px;
+  border:10px solid #555050;
+  border-left:none !important;
+  border-right:5px solid #555050 !important;
+
+}
+
+@media (max-width:400px) {
+  #achievementSidebar {
+  position: fixed;
+
+  top: 0;
+  left: 100vw;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: #2b2824;
+
+  padding: 20px;
+
+  transition: left 0.35s ease;
+
+  z-index: 999999;
+
+  overflow-y: auto;
+  border-top-right-radius:0px;
+  border-bottom-right-radius:0px;
+  border: none !important;
+}
+}
+
+#achievementSidebar.open {
+  left: 0;
+}
+
+.achievement {
+  margin-bottom: 20px;
+  cursor: pointer;
+    justify-content:center;
+  display:flex;
+  padding:10px;
+  border-radius:20px;
+   border: 10px solid #65606000;
+}
+
+.achievement.unlocked {
+    transition: 0.25s;
+}
+
+.achievement img {
+  width: 170px;
+  border-radius:20px;
+  transition: 0.25s;
+}
+
+.achievement.locked img {
+  filter:
+    brightness(0)
+    saturate(0)
+    blur(3.5px);
+
+  opacity: 0.4;
+}
+
+.achievement p {
+  color: #b7b2af;
+  text-align:center;
+  margin-top:20px;
+  margin-left:10px;
+}
+
+.achievement.unlocked:hover {
+  transform: scale(1.05);
+    background-color: #b7b2af;
+      border: 10px solid #656060;
+  border-radius:20px;
+}
+
+
+.achievement.unlocked:hover img {
+ filter:drop-shadow(2px 2px 0px #2b2824)
+}
+
+.achievement.unlocked:hover p {
+  color:#2b2824 !important
+}
+
+
+
+#achievementToast {
+  position: fixed;
+
+  top: 20px;
+  right: 20px;
+
+  background: rgb(197, 170, 122);
+
+  padding: 16px 22px;
+
+  border-radius: 14px;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: 0.3s;
+
+  z-index: 9999999;
+}
+
+#achievementToast.show {
+  opacity: 1;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #555050;
+  margin-top:2px;
+  margin-bottom:2px;
+  border-radius:20px
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #88a4b7;
+  transition:0.2s;
+   border-radius:20px
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #88a4b7;
+    transition:0.2s
+}
+
+@media (max-width:400px) {
+  
+/* width */
+::-webkit-scrollbar {
+  display:none;
+}
+
+}
+
+
+/* bum ahh modal */
+
+#achievementModal {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,0.75);
+
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999999999;
+
+  backdrop-filter: blur(4px);
+
+}
+
+#achievementModalContent {
+  background: #d4d0c8;
+
+  border: 6px solid #656060;
+  border-radius: 24px;
+
+  padding: 28px;
+
+  width: min(500px, 92vw);
+
+  text-align: center;
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+
+  animation: modalPop 0.2s ease-in-out;
+}
+
+#modalTitle {
+  color: #2b2824
+}
+
+#achievementModal img {
+  width: 300px;
+  margin-bottom: 16px;
+}
+
+#achievementModal video {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 14px;
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+.sidebarmessage {
+  font-size:0.85rem !important
+}
+
+/*bum ahh bucky*/
+#eventLayer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5000;
+}
+
+.randomEvent {
+  position: fixed;
+
+  width: 155px;
+
+  pointer-events: auto;
+  cursor: pointer;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  animation: fallEvent linear forwards;
+  transition:all 0.2s ease
+}
+
+.randomEvent:hover {
+  filter:drop-shadow(1px 1px 0px #fff) drop-shadow(-1px 1px 0px #fff) drop-shadow(1px -1px 0px #fff) drop-shadow(-1px -1px 0px #fff) ;
+  transform:scale(1.02)
+}
+
+@keyframes fallEvent {
+  from {
+    transform: translateY(-150px) rotate(0deg);
+  }
+
+  to {
+    transform: translateY(110vh) rotate(10deg);
+  }
+}
+
+.randomEvent.clicked {
+  animation: none !important;
+
+  transform: scale(1.15);
+
+  opacity: 0;
+
+  transition:
+    opacity 2s ease,
+    transform 2s ease;
+}
+
+#eventCounter {
+position:absolute;
+top:-12.5px;
+right:17.5px;
+  background-color: #88a4b7;
+  color: white;
+  padding: 5px;
+  font-size: 16px;
+   border: 10px solid #656060;
+  cursor: pointer;
+  border-radius:20px;
+  
+  z-index: 99999;
+}
+
+
+.hidden {
+  display: none !important;
 }

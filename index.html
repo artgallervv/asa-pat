@@ -40,13 +40,17 @@
 
 <h2 ><a href="index.html"><img class="logo mr-2 p-1 mt-n2" src="image/meta.png"><span class="mt-2">PAT ASA MITAKA!!!</span></a></h2>
 
-<div class="dropdown">
-  <button class="dropbtn p-2">Notes</button>
+
+
+<div class="dropdown ">
+
+  <button class="dropbtn p-2 mt-5">Notes</button>
   <div class="dropdown-content">
-  <div class="p-3"><div class="row no-gutters">
- <h4 class="link col-12 py-1"><a class="ml-2 link-text " href="https://instagram.com/artgallervv"> <i class=" fa-brands fa-instagram"></i>  @artgallervv</a></h4>
+  <div class="p-3">
+    <div class="row no-gutters">
+ <h5 class="link col-12 py-1"><a class="ml-2 link-text " href="https://instagram.com/artgallervv"> <i class=" fa-brands fa-instagram"></i>  @artgallervv</a></h5>
   </div>
-  <div class=" message p-3">  Asa has recieved<script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=b31b91e19bb7dde35ac51a3e1ee211ebba565f73'></script>
+  <div class=" message p-3 mt-n2">  Asa has recieved<script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=b31b91e19bb7dde35ac51a3e1ee211ebba565f73'></script>
 <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1554209/t/3"></script>pats from visitors across the world!</div>
   </div>
 </div>
@@ -55,8 +59,12 @@
 
 
 
- </nav>
 
+ </nav>
+<button id="switchBtn" class="switching-button p-1 px-3  mt-n5 ml-3" >
+  Switch
+</button>
+   
 
 <div class="ml-4">
     <p class="justify-content-center px-3" id="instruction"></p>
@@ -71,9 +79,9 @@
 
 <div class="mt-n5 " id="characterWrapper">
 
-      <img id="character" src="image/asa_idle.png" alt="Character">
+      <img id="character" src="" alt="Character">
 
-  <img id="characterHover" src="image/asa_turning.png">
+  <img id="characterHover" src="">
   
 
 </div>
@@ -94,7 +102,7 @@
 </div>
 
 
-
+<div id="achievementToast"></div>
 
 <div id="hud">
 
@@ -110,15 +118,63 @@
       <button class="mt-n1 mb-4 hidden p-2" id="restartBtn" style="z-index:99999">
       Pat again!
     </button>
+<div id="eventCounter">
+  Buckys squashed: <span id="eventCount">0</span>
+</div>
+  </div>
+
+</div>
+
+<button id="achievementToggle">
+Achievment
+</button>
+
+<div id="achievementSidebar" >
+
+  <h3>ACHIEVEMENTS!!!</h3>
+  <p class="message sidebarmessage p-3" >Maybe if you pat Asa a certain amount of times, something cool will pop up here!</p>
+
+  <div id="achievementShelf">
+
+    
+  </div>
+
+  
+
+</div>
+
+<div id="achievementToast"></div>
+
+
+
+<div id="achievementToast"></div>
+
+<div id="achievementModal">
+
+  <div id="achievementModalContent">
+
+    <img id="modalImage">
+
+    <h2 id="modalTitle"></h2>
+
+    <p id="modalDescription"></p>
+
+    <video
+      id="modalVideo"
+      controls
+      style="display:none;"
+    ></video>
 
   </div>
 
 </div>
 
-
+<div id="eventLayer"></div>
 
 
 <script src="styles/pet.js"></script>
+<script src="styles/achievement.js"></script>
+<script src="styles/bucky.js"></script>
  <script src="https://kit.fontawesome.com/08dab0bf2a.js" crossorigin="anonymous"></script>
 
 </body>

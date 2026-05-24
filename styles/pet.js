@@ -1,12 +1,32 @@
 
+const switchBtn = document.getElementById("switchBtn");
 const petCursor = document.getElementById("petCursor");
 const characterWrapper = document.getElementById("characterWrapper");
 const characterHover = document.getElementById("characterHover");
 const restartBtn = document.getElementById("restartBtn");
+const CHARACTERS = {
+  asa: {
+    idle: "image/asa_idle.png",
+    ready: "image/asa.png",
+    sad: "image/asa_mad.png",
+    happy: "image/asa_happy.png",
+    turning: "image/asa_turning.png"
+  },
 
+  reze: {
+    idle: "image/reze_idle.png",
+    ready: "image/reze.png",
+    sad: "image/reze_mad.png",
+    happy: "image/reze_happy.png",
+    turning: "image/reze_turning.png"
+  }
+};
+
+let currentCharacter = localStorage.getItem("character") || "asa";
 
 let mouseX = 0;
 let mouseY = 0;
+let soundEnabled = true;
 
 document.addEventListener("mousemove", (e) => {
   mouseX = e.clientX;
@@ -18,31 +38,16 @@ const isTouchDevice =
   'ontouchstart' in window ||
   navigator.maxTouchPoints > 0;
 
-
-
 function setCharacterState(state) {
-  if (state === "idle") {
-    character.src = "image/asa_idle.png";
-  }
-
-  if (state === "ready") {
-    character.src = "image/asa.png";
-  }
-
-  if (state === "sad") {
-    character.src = "image/asa_mad.png";
-  }
-
-  if (state === "happy") {
-    character.src = "image/asa_happy.png";
-  }
+  character.src = CHARACTERS[currentCharacter][state];
 }
 
-
-
-const petSound = new Audio("audio/petting.mp3");
+const petSound = new Audio("audio/actual-pet.mp3");
 petSound.loop = true;
-petSound.volume = 0.4;
+petSound.volume = 0.35;
+petSound.preload = "auto";
+
+
 
 const character = document.getElementById("character");
 const progressBarContainer = document.querySelector(".progress-bar");
@@ -62,32 +67,29 @@ let sad = false;
 let audioUnlocked = false;
 
 // pet counter init
-let petCount = localStorage.getItem("petCount") || 0;
-counterText.textContent = `You've given Asa ${petCount} pats so far!`;
+let petCount = Number(localStorage.getItem("petCount")) || 0;
+let switchUnlocked = localStorage.getItem("switchUnlocked") === "true";
+counterText.textContent = `You've given ${getCharacterName()} ${petCount} pats so far!`;
 
 
 // clicking character stuff
 character.addEventListener("click", () => {
 
   // unlock audio on first interaction [IM ADDING THE AUDIO IN LATER IM TOO TIRED LOL]
-  if (!audioUnlocked) {
-    petSound.play().then(() => {
-      petSound.pause();
-      petSound.currentTime = 0;
-      audioUnlocked = true;
-    });
-  }
+
+  unlockAudio();
 
   if (mode !== "idle") return;
 
   mode = "ready";
+  switchBtn.style.display = "none";
   lastInteraction = Date.now();
   sad = false;
 
-  character.src = "image/asa.png";
+ character.src = CHARACTERS[currentCharacter].ready;
 
-  instruction.textContent = "Hold down left click to pat Asa!!";
-  progressBarContainer.classList.remove("hidden");
+  instruction.textContent = `Hold down left click to pat ${getCharacterName()}!!`;
+ 
 });
 
 
@@ -106,14 +108,14 @@ if (!isTouchDevice) {
   });
 
 }
-
 character.addEventListener("mousedown", (e) => {
 
-    characterHover.style.opacity = 0;
-characterHover.style.visibility = "hidden";
-document.body.classList.add("petting");
+  if (!hoveringCharacter && !isTouchDevice) return;
 
-if (!hoveringCharacter && !isTouchDevice) return;
+  unlockAudio(); // 🔥 important
+
+  characterHover.style.opacity = 0;
+  characterHover.style.visibility = "hidden";
 
   petting = true;
   lastInteraction = Date.now();
@@ -121,12 +123,9 @@ if (!hoveringCharacter && !isTouchDevice) return;
   document.body.classList.add("petting");
   petCursor.style.display = "block";
 
-  if (!audioUnlocked) {
-    petSound.play().then(() => {
-      petSound.pause();
-      petSound.currentTime = 0;
-      audioUnlocked = true;
-    });
+  if (audioUnlocked) {
+    petSound.currentTime = 0;
+    petSound.play().catch(() => {});
   }
 });
 
@@ -192,7 +191,7 @@ if (mode === "ready" && !success) {
     if (secondsIdle > 2 && !sad) {
       sad = true;
       setCharacterState("sad");
-      message.textContent = "STOP IGNORING ASA!!!!!";
+      message.textContent = `STOP IGNORING ${getCharacterName()}!!!!!`;
     }
   }
 }
@@ -202,12 +201,14 @@ if (progress >= 100 && !success) {
   success = true;
   mode = "success";
 
-  character.src = "image/asa_happy.png";
-  message.textContent = "Asa is happy now! yay!!!";
+  character.src = CHARACTERS[currentCharacter].happy;
+  message.textContent = `${getCharacterName()} is happy now! yay!!!`;
 
   petCount++;
+  checkAchievements();
   localStorage.setItem("petCount", petCount);
-  counterText.textContent = `You've now pat Asa ${petCount} times!`;
+  checkSwitchUnlock();
+  counterText.textContent = `You've now pat  ${getCharacterName()} ${petCount} times!`;
 
   restartBtn.classList.remove("hidden"); // ⭐ SHOW BUTTON
 }
@@ -285,6 +286,8 @@ wrapper.addEventListener("touchstart", (e) => {
 
   hoveringCharacter = true;
   petting = true;
+  petSound.currentTime = 0;
+petSound.play();
   lastInteraction = Date.now();
 
   document.body.classList.add("petting");
@@ -297,9 +300,9 @@ if (mode === "idle") {
   lastInteraction = Date.now();
   sad = false;
 
-  character.src = "image/asa.png";
+  character.src = CHARACTERS[currentCharacter].ready;
 
-  instruction.textContent = "Keep holding to pat Asa!!";
+  instruction.textContent = `Keep holding to pat ${getCharacterName()}!!`;
   progressBarContainer.classList.remove("hidden");
 }
 
@@ -364,3 +367,90 @@ observer.observe(document.body, {
 restartBtn.addEventListener("click", () => {
   location.reload();
 });
+
+//Audio
+function unlockAudio() {
+  if (audioUnlocked) return;
+
+  petSound.play()
+    .then(() => {
+      petSound.pause();
+      petSound.currentTime = 0;
+      audioUnlocked = true;
+    })
+    .catch(() => {
+      // ignore
+    });
+}
+
+
+
+//notorious ahh switch menu
+//test-two
+
+
+switchBtn.addEventListener("click", () => {
+  currentCharacter = currentCharacter === "asa" ? "reze" : "asa";
+
+  localStorage.setItem("character", currentCharacter);
+
+  setCharacterState("idle");
+  updateHoverSprite();
+});
+
+ function updateRegularSprite() {
+  character.src = `image/${currentCharacter}_idle.png`;
+}
+
+function updateHoverSprite() {
+  characterHover.src = `image/${currentCharacter}_turning.png`;
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  currentCharacter = localStorage.getItem("character") || "asa";
+
+  updateRegularSprite();
+  updateHoverSprite();
+});
+
+//bum ahh hide button thingy aughhh
+function initSwitchButton() {
+  if (switchUnlocked) {
+    switchBtn.classList.remove("hidden");
+  } else {
+    switchBtn.classList.add("hidden");
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  currentCharacter = localStorage.getItem("character") || "asa";
+
+  updateRegularSprite();
+  updateHoverSprite();
+
+  initSwitchButton();
+});
+
+function checkSwitchUnlock() {
+  if (!switchUnlocked && petCount >= 135) {
+    switchUnlocked = true;
+    localStorage.setItem("switchUnlocked", "true");
+
+    switchBtn.classList.remove("hidden");
+  }
+}
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (switchUnlocked) {
+    switchBtn.classList.remove("hidden");
+  } else {
+    switchBtn.classList.add("hidden");
+  }
+});
+
+
+//name stuff ig
+function getCharacterName() {
+  return currentCharacter === "asa" ? "Asa" : "Reze";
+}
