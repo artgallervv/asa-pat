@@ -731,7 +731,7 @@ body.petting #characterHover {
 .randomEvent {
   position: fixed;
 
-  width: 155px;
+  width: 15.5vw;
 
   pointer-events: auto;
   cursor: pointer;
@@ -741,6 +741,25 @@ body.petting #characterHover {
 
   animation: fallEvent linear forwards;
   transition:all 0.2s ease
+}
+
+@media (max-width:768px) {
+  .randomEvent {
+  position: fixed;
+
+  width: 22.75vw;
+
+  pointer-events: auto;
+  cursor: pointer;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  animation: fallEvent linear forwards;
+  transition:all 0.2s ease
+}
+
+
 }
 
 .randomEvent:hover {

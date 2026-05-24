@@ -112,7 +112,7 @@ character.addEventListener("mousedown", (e) => {
 
   if (!hoveringCharacter && !isTouchDevice) return;
 
-  unlockAudio(); // 🔥 important
+  unlockAudio(); // tehehehehehehehe
 
   characterHover.style.opacity = 0;
   characterHover.style.visibility = "hidden";
@@ -210,7 +210,7 @@ if (progress >= 100 && !success) {
   checkSwitchUnlock();
   counterText.textContent = `You've now pat  ${getCharacterName()} ${petCount} times!`;
 
-  restartBtn.classList.remove("hidden"); // ⭐ SHOW BUTTON
+  restartBtn.classList.remove("hidden"); // show that bum ahh button BWAHAHAHAH
 }
 
   requestAnimationFrame(gameLoop);
@@ -432,7 +432,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function checkSwitchUnlock() {
-  if (!switchUnlocked && petCount >= 135) {
+  if (!switchUnlocked && petCount >= 1000) {
     switchUnlocked = true;
     localStorage.setItem("switchUnlocked", "true");
 
